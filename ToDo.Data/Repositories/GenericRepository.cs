@@ -3,30 +3,30 @@ using ToDo.Core.Entities.Base;
 
 namespace ToDo.Data.Repositories;
 
-public class GenericRepository<TEntity, TId>
+public abstract class GenericRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
     protected readonly ApplicationDbContext Context;
     protected readonly DbSet<TEntity> DbSet;
 
-    public GenericRepository(ApplicationDbContext context)
+    protected GenericRepository(ApplicationDbContext context)
     {
         this.Context = context;
         this.DbSet = context.Set<TEntity>();
     }
 
-    public async Task<List<TEntity>> GetAllAsync()
+    public virtual async Task<List<TEntity>> GetAllAsync()
     {
         return await DbSet.ToListAsync();
     }
 
-    public async Task<TEntity?> GetByIdAsync(TId id)
+    public virtual async Task<TEntity?> GetByIdAsync(TId id)
     {
         return await DbSet.FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
-    public async Task<TEntity> CreateAsync(TEntity entity)
+    public virtual async Task<TEntity> CreateAsync(TEntity entity)
     {
         entity.CreatedOn = DateTime.UtcNow;
 
@@ -37,7 +37,7 @@ public class GenericRepository<TEntity, TId>
         return entity;
     }
 
-    public async Task UpdateAsync(TEntity entity)
+    public virtual async Task UpdateAsync(TEntity entity)
     {
         entity.UpdatedOn = DateTime.UtcNow;
 
@@ -46,7 +46,7 @@ public class GenericRepository<TEntity, TId>
         await Context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(TId id)
+    public virtual async Task DeleteAsync(TId id)
     {
         var entity = await GetByIdAsync(id);
         if (entity == null)
