@@ -11,7 +11,7 @@ using ToDo.Data;
 namespace ToDo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261029151653_InitialCreate")]
+    [Migration("20261029183123_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,9 +33,10 @@ namespace ToDo.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .HasMaxLength(2000)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DueDate")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsCompleted")
@@ -49,6 +50,7 @@ namespace ToDo.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(2000)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedOn")
