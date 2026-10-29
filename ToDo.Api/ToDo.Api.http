@@ -1,0 +1,50 @@
+@ToDo_HostAddress = http://localhost:5062
+
+### Get all to-do items
+
+GET {{ToDo_HostAddress}}/ToDoItem
+Accept: application/json
+
+###
+
+### Get a to-do item by ID
+
+GET {{ToDo_HostAddress}}/ToDoItem/a358ab4b-0ccc-4d64-94f0-3f217bb84922
+Accept: application/json
+
+###
+
+### Create a to-do item
+
+POST {{ToDo_HostAddress}}/ToDoItem
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Title": "Test",
+  "Description": "This is a test.",
+  "DueDate": "2026-10-30",
+  "Priority": 2
+}
+
+###
+
+### Update a to-do item
+
+PUT {{ToDo_HostAddress}}/ToDoItem/a358ab4b-0ccc-4d64-94f0-3f217bb84922
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Title": "Updated test",
+  "Description": "Updated description.",
+  "DueDate": "2026-10-31",
+  "Priority": 2
+}
+
+###
+
+### Delete a to-do item
+
+DELETE {{ToDo_HostAddress}}/ToDoItem/a358ab4b-0ccc-4d64-94f0-3f217bb84922
+Accept: application/json
