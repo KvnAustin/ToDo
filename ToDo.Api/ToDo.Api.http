@@ -9,7 +9,7 @@ Accept: application/json
 
 ### Get a to-do item by ID
 
-GET {{ToDo_HostAddress}}/ToDoItem/3b3fbbb3-8d87-4f21-b749-d7498fbf6ec5
+GET {{ToDo_HostAddress}}/ToDoItem/???
 Accept: application/json
 
 ###
@@ -21,30 +21,30 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Title": "Test",
-  "Description": "This is a test.",
-  "DueDate": "2026-10-30",
-  "Priority": 2
+  "Title": "",
+  "Description": "",
+  "DueDate": "",
+  "Priority": 0
 }
 
 ###
 
 ### Update a to-do item
 
-PUT {{ToDo_HostAddress}}/ToDoItem/3b3fbbb3-8d87-4f21-b749-d7498fbf6ec5
+PUT {{ToDo_HostAddress}}/ToDoItem/???
 Content-Type: application/json
 Accept: application/json
 
 {
-  "Title": "Updated test",
-  "Description": "Updated description.",
-  "DueDate": "2026-10-31",
-  "Priority": 1
+  "Title": "",
+  "Description": "",
+  "DueDate": "",
+  "Priority": 0
 }
 
 ###
 
 ### Delete a to-do item
 
-DELETE {{ToDo_HostAddress}}/ToDoItem/7049eb7b-c6b7-427c-8eba-1a2553154690
+DELETE {{ToDo_HostAddress}}/ToDoItem/???
 Accept: application/json
