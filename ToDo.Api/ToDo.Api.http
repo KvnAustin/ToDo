@@ -9,7 +9,7 @@ Accept: application/json
 
 ### Get a to-do item by ID
 
-GET {{ToDo_HostAddress}}/ToDoItem/7049eb7b-c6b7-427c-8eba-1a2553154690
+GET {{ToDo_HostAddress}}/ToDoItem/3b3fbbb3-8d87-4f21-b749-d7498fbf6ec5
 Accept: application/json
 
 ###
@@ -31,7 +31,7 @@ Accept: application/json
 
 ### Update a to-do item
 
-PUT {{ToDo_HostAddress}}/ToDoItem/7049eb7b-c6b7-427c-8eba-1a2553154690
+PUT {{ToDo_HostAddress}}/ToDoItem/3b3fbbb3-8d87-4f21-b749-d7498fbf6ec5
 Content-Type: application/json
 Accept: application/json
 

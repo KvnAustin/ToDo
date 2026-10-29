@@ -34,6 +34,12 @@ public class ToDoItemService : IToDoItem
 
     public async Task<ToDoItemResult> CreateAsync(CreateToDoItemCommand command)
     {
+        ValidateToDoItem(
+            command.Title, 
+            command.Description, 
+            command.Priority
+            );
+
         var item = new ToDoItem
         {
             Title = command.Title,
@@ -50,6 +56,12 @@ public class ToDoItemService : IToDoItem
 
     public async Task<bool> UpdateAsync(Guid id, UpdateToDoItemCommand command)
     {
+        ValidateToDoItem(
+            command.Title,
+            command.Description,
+            command.Priority
+            );
+
         var item = await _repository.GetByIdAsync(id);
         if (item is null)
             return false;
@@ -88,6 +100,22 @@ public class ToDoItemService : IToDoItem
             DueDate = item.DueDate,
             Priority = item.Priority
         };
+    }
+
+    private static void ValidateToDoItem(
+        string title,
+        string? description,
+        int priority
+        )
+    {
+        if (string.IsNullOrWhiteSpace(title) || title.Length > 200)
+            throw new ArgumentException("Title must be between 1 and 200 characters.");
+
+        if (description?.Length > 2000)
+            throw new ArgumentException("Description cannot exceed 2000 characters.");
+
+        if (priority is < 1 or > 3)
+            throw new ArgumentOutOfRangeException(nameof(priority), "Priority must be between 1 and 3.");
     }
     #endregion
 }
