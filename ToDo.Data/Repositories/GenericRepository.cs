@@ -7,32 +7,32 @@ public abstract class GenericRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
-    protected readonly ApplicationDbContext Context;
-    protected readonly DbSet<TEntity> DbSet;
+    protected readonly ApplicationDbContext _context;
+    protected readonly DbSet<TEntity> _dbSet;
 
     protected GenericRepository(ApplicationDbContext context)
     {
-        this.Context = context;
-        this.DbSet = context.Set<TEntity>();
+        _context = context;
+        _dbSet = context.Set<TEntity>();
     }
 
     public virtual async Task<List<TEntity>> GetAllAsync()
     {
-        return await DbSet.ToListAsync();
+        return await _dbSet.ToListAsync();
     }
 
     public virtual async Task<TEntity?> GetByIdAsync(TId id)
     {
-        return await DbSet.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        return await _dbSet.FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
     public virtual async Task<TEntity> CreateAsync(TEntity entity)
     {
         entity.CreatedOn = DateTime.UtcNow;
 
-        await DbSet.AddAsync(entity);
+        await _dbSet.AddAsync(entity);
 
-        await Context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
         return entity;
     }
@@ -41,9 +41,7 @@ public abstract class GenericRepository<TEntity, TId>
     {
         entity.UpdatedOn = DateTime.UtcNow;
 
-        DbSet.Update(entity);
-
-        await Context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 
     public virtual async Task DeleteAsync(TId id)
@@ -55,6 +53,6 @@ public abstract class GenericRepository<TEntity, TId>
         entity.IsDeleted = true;
         entity.DeletedOn = DateTime.UtcNow;
 
-        await Context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 }
